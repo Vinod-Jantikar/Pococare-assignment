@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Register.css";
 
 const Register = () => {
@@ -16,7 +17,14 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(registerData);
+
+    fetch(`http://localhost:8787/user/register`, {
+      method: "POST",
+      body: JSON.stringify(registerData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   return (
@@ -53,7 +61,9 @@ const Register = () => {
         />
         <input type="submit" value="submit" />
       </form>
-      
+      <p>
+        Already have an account? <Link to="/login"> Login </Link>{" "}
+      </p>
     </div>
   );
 };

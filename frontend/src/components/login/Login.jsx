@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import './Login.css'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import "./Login.css";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -14,11 +15,18 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(loginData);
+
+    fetch(`http://localhost:8787/user/login`, {
+      method: "POST",
+      body: JSON.stringify(loginData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   return (
-    <div className='login-div'>
+    <div className="login-div">
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
         <input
@@ -37,6 +45,10 @@ const Login = () => {
         />
         <input type="submit" value="submit" />
       </form>
+
+      <p>
+        Don't have an account? <Link to="/register"> Register </Link>{" "}
+      </p>
     </div>
   );
 };
