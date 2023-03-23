@@ -5,7 +5,7 @@ const User = require("../model/user.model");
 const auth = require("../middlewares/auth");
 
 const newToken = (user) => {
-  return jwt.sign({ user }, "jfjhsfuhefiucndkjsc");
+  return jwt.sign({ user }, process.env.ACCESS_TOKEN_KEY);
 };
 
 // Register
